@@ -104,7 +104,7 @@ build:
     - mkdir /etc/puppet/modules/beats
     - cp -ar ./* /etc/puppet/modules/beats
     - source /etc/profile.d/rvm.sh; puppet module list
-    # fix for concat noop mode problem
+# fix for concat noop mode problem
     - puppet apply -e "concat { '/tmp/file': ensure => absent, }"
     - source /etc/profile.d/rvm.sh; puppet apply tests/init.pp --test --noop
   post_ci:
