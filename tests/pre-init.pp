@@ -1,3 +1,3 @@
-concat { '/tmp/file': 
+concat { '/tmp/file':
   ensure => absent,
 }
