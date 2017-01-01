@@ -12,7 +12,7 @@
 #include ::beats
 class { '::beats':
   outputs_deep_merge => false,
-  outputs_logstash => {
+  outputs_logstash   => {
     'filebeat' => { 'hosts' => [ 'logstash.example.com:5044' ], },
     'topbeat'  => { 'hosts' => [ 'logstash.example.com:5044' ], },
   },
