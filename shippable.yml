@@ -106,6 +106,9 @@ build:
     - source /etc/profile.d/rvm.sh; puppet module list
 # fix for concat noop mode problem
 #    - source /etc/profile.d/rvm.sh; puppet apply tests/pre-init.pp
+# fix for non-noop puppet mode
+    - yum clean all
+# test "real" scenarios
     - source /etc/profile.d/rvm.sh; puppet apply tests/init.pp --test
   post_ci:
     - ls -lh shippable/testresults
