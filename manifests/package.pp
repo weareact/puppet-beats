@@ -36,8 +36,8 @@ class beats::package (
         }
 
         package { 'GeoIP':
-          ensure => latest,
-          require => $require_for_geoip,
+           ensure => latest,
+           require => $require_for_geoip,
         }
       }
 
