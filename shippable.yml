@@ -105,8 +105,8 @@ build:
     - cp -ar ./* /etc/puppet/modules/beats
     - source /etc/profile.d/rvm.sh; puppet module list
 # fix for concat noop mode problem
-    - source /etc/profile.d/rvm.sh; puppet apply tests/pre-init.pp
-    - source /etc/profile.d/rvm.sh; puppet apply tests/init.pp --test --noop
+#    - source /etc/profile.d/rvm.sh; puppet apply tests/pre-init.pp
+    - source /etc/profile.d/rvm.sh; puppet apply tests/init.pp --test
   post_ci:
     - ls -lh shippable/testresults
     - ls -lh shippable/codecoverage
