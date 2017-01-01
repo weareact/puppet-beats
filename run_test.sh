@@ -2,7 +2,7 @@
 
 source /etc/bashrc;
 
-puppet apply puppet apply $1 --test;
+puppet apply $1 --test;
 retval=$?;
 
 if [[ $retval -eq 2 ]]; then
