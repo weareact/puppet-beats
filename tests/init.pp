@@ -13,9 +13,9 @@ include ::beats
 include ::beats::topbeat
 include ::beats::filebeat
 
-class { 'beats':
+class { '::beats':
   #outputs_deep_merge => false,
   outputs_logstash => {
-    "filebeat" => { "hosts" => [ "logstash.example.com:5044" ], },
+    'filebeat' => { 'hosts' => [ 'logstash.example.com:5044' ], },
   },
 }
