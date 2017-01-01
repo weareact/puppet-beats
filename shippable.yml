@@ -108,7 +108,7 @@ build:
 #    - source /etc/profile.d/rvm.sh; puppet apply tests/pre-init.pp
 # fix for non-noop puppet mode
     - yum clean all
-# test "real" scenarios
+# test real scenarios
 #    - source /etc/profile.d/rvm.sh; puppet apply tests/init.pp --test
      - bash run_test.sh tests/init.pp
 
