@@ -18,6 +18,11 @@ class { '::beats':
   },
 }
 
-include ::beats::topbeat
-include ::beats::filebeat
+#include ::beats::topbeat
+class { '::beats::topbeat':
+}
+
+#include ::beats::filebeat
+class { '::beats::filebeat':
+}
 
