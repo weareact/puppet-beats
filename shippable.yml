@@ -110,7 +110,8 @@ build:
     - yum clean all
 # test "real" scenarios
 #    - source /etc/profile.d/rvm.sh; puppet apply tests/init.pp --test
-     - 'bash -c "source /etc/bashrc; puppet apply tests/init.pp --test; retval=\$?; if [[ \$retval -eq 2 ]]; then exit 0; else exit \$retval; fi;";'
+     -
+      bash -c "source /etc/bashrc; puppet apply tests/init.pp --test; retval=\$?; if [[ \$retval -eq 2 ]]; then exit 0; else exit \$retval; fi;"
 
   post_ci:
     - ls -lh shippable/testresults
