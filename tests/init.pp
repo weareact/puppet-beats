@@ -9,13 +9,14 @@
 # Learn more about module testing here:
 # http://docs.puppetlabs.com/guides/tests_smoke.html
 #
-include ::beats
-include ::beats::topbeat
-include ::beats::filebeat
-
+#include ::beats
 class { '::beats':
   #outputs_deep_merge => false,
   outputs_logstash => {
     'filebeat' => { 'hosts' => [ 'logstash.example.com:5044' ], },
   },
 }
+
+include ::beats::topbeat
+include ::beats::filebeat
+
