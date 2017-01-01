@@ -20,7 +20,7 @@ env:
 #  - PUPPET_GEM_VERSION="~> 3.6.0" STRICT_VARIABLES=yes
 #  - PUPPET_GEM_VERSION="~> 3.7.0" STRICT_VARIABLES=yes
   - PUPPET_GEM_VERSION="~> 3.8.0" STRICT_VARIABLES=yes FUTURE_PARSER=yes
-  - PUPPET_GEM_VERSION="~> 4"
+#  - PUPPET_GEM_VERSION="~> 4"
 
 matrix:
   exclude:
@@ -109,7 +109,9 @@ build:
 # fix for non-noop puppet mode
     - yum clean all
 # test "real" scenarios
-    - source /etc/profile.d/rvm.sh; puppet apply tests/init.pp --test
+#    - source /etc/profile.d/rvm.sh; puppet apply tests/init.pp --test
+     - bash -c "source /etc/bashrc; puppet apply tests/init.pp --test; retval=\$?; if [[ \$retval -eq 2 ]]; then exit 0; else exit \$retval; fi;";
+
   post_ci:
     - ls -lh shippable/testresults
     - ls -lh shippable/codecoverage
