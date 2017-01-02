@@ -10,11 +10,11 @@ define beats::common::headers (
   $geoip_paths           = ['/usr/share/GeoIP/GeoIPCity.dat'],
 ) {
   concat { "/etc/${title}/${title}.yml":
+    ensure  => $ensure,
     group   => 'root',
     mode    => '0644',
     owner   => 'root',
     order   => 'numeric',
-    ensure  => $ensure,
     require => Package[$title],
     notify  => Service[$title],
   }
