@@ -41,5 +41,10 @@ class beats::topbeat (
     enable => $service_enable,
   }
 
-  Package['topbeat'] -> Class['beats::topbeat::config'] ~> Service['topbeat']
+  if ($beats::topbeat::ensure != 'absent'){
+    Package['topbeat'] -> Class['beats::topbeat::config'] ~> Service['topbeat']
+  }
+  else{
+    Package['topbeat'] ~> Service['topbeat']
+  }
 }
