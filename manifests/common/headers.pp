@@ -1,5 +1,6 @@
 # Create header blocks for beats
 define beats::common::headers (
+  $ensure                = present,
   $agentname             = $beats::agentname,
   $tags                  = $beats::tags,
   $refresh_topology_freq = $beats::refresh_topology_freq,
@@ -7,7 +8,6 @@ define beats::common::headers (
   $uid                   = $beats::uid,
   $gid                   = $beats::gid,
   $geoip_paths           = ['/usr/share/GeoIP/GeoIPCity.dat'],
-  $ensure                = present,
 ) {
   concat { "/etc/${title}/${title}.yml":
     group   => 'root',
