@@ -15,9 +15,9 @@ class beats::topbeat (
   else{
     $service_ensure = $beats::ensure
     $service_enable = $beats::enable
-  }
 
-  include ::beats::topbeat::config
+    include ::beats::topbeat::config
+  }
 
   case $::osfamily {
     'RedHat': {

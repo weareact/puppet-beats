@@ -47,7 +47,7 @@ class beats::filebeat (
     ensure => $service_ensure,
     enable => $service_enable,
   }
-  if $prospectors {
+  if ($prospectors and $ensure != 'absent'){
     create_resources('::beats::filebeat::prospector', $prospectors )
   }
 
@@ -56,7 +56,6 @@ class beats::filebeat (
     Beats::Filebeat::Prospector <||> ~> Service['filebeat']
   }
   else{
-    Package['filebeat'] ->
-    Beats::Filebeat::Prospector <||> ~> Service['filebeat']
+    Package['filebeat'] ~> Service['filebeat']
   }
 }
