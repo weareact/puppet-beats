@@ -16,12 +16,14 @@ class beats::filebeat (
     $service_enable = $beats::enable
   }
 
-  beats::common::headers {'filebeat':}
-  concat::fragment {'filebeat.header':
-    target  => '/etc/filebeat/filebeat.yml',
-    content => template('beats/filebeat/filebeat.yml.erb'),
-    order   => '05',
-    notify  => Service['filebeat'],
+  if ($ensure != 'absent'){
+    beats::common::headers {'filebeat':}
+    concat::fragment {'filebeat.header':
+      target  => '/etc/filebeat/filebeat.yml',
+      content => template('beats/filebeat/filebeat.yml.erb'),
+      order   => '05',
+      notify  => Service['filebeat'],
+    }
   }
 
   case $::osfamily {
@@ -45,10 +47,15 @@ class beats::filebeat (
     ensure => $service_ensure,
     enable => $service_enable,
   }
-  if $prospectors {
+  if ($prospectors and $ensure != 'absent'){
     create_resources('::beats::filebeat::prospector', $prospectors )
   }
 
-  Package['filebeat'] -> Concat::Fragment['filebeat.header'] ->
-  Beats::Filebeat::Prospector <||> ~> Service['filebeat']
+  if ($ensure != 'absent'){
+    Package['filebeat'] -> Concat::Fragment['filebeat.header'] ->
+    Beats::Filebeat::Prospector <||> ~> Service['filebeat']
+  }
+  else{
+    Package['filebeat'] ~> Service['filebeat']
+  }
 }
