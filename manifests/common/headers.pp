@@ -7,12 +7,14 @@ define beats::common::headers (
   $uid                   = $beats::uid,
   $gid                   = $beats::gid,
   $geoip_paths           = ['/usr/share/GeoIP/GeoIPCity.dat'],
+  $ensure                = present,
 ) {
   concat { "/etc/${title}/${title}.yml":
     group   => 'root',
     mode    => '0644',
     owner   => 'root',
     order   => 'numeric',
+    ensure  => $ensure,
     require => Package[$title],
     notify  => Service[$title],
   }
