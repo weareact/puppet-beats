@@ -7,6 +7,15 @@ class beats::filebeat (
   $spool_size    = 1024,
 ){
 
+  if ($ensure == "absent"){
+    $service_ensure = undef
+    $service_enable = undef
+  }
+  else{
+    $service_ensure = $beats::ensure
+    $service_enable = $beats::enable
+  }
+
   beats::common::headers {'filebeat':}
   concat::fragment {'filebeat.header':
     target  => '/etc/filebeat/filebeat.yml',
@@ -33,8 +42,8 @@ class beats::filebeat (
   }
 
   service { 'filebeat':
-    ensure => running,
-    enable => true,
+    ensure => $service_ensure,
+    enable => $service_enable,
   }
   if $prospectors {
     create_resources('::beats::filebeat::prospector', $prospectors )
