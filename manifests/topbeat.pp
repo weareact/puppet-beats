@@ -8,6 +8,15 @@ class beats::topbeat (
   $stats_filesystem = true,
 ){
 
+  if ($ensure == 'absent'){
+    $service_ensure = undef
+    $service_enable = undef
+  }
+  else{
+    $service_ensure = $beats::ensure
+    $service_enable = $beats::enable
+  }
+
   include ::beats::topbeat::config
 
   case $::osfamily {
@@ -28,8 +37,8 @@ class beats::topbeat (
   }
 
   service { 'topbeat':
-    ensure => running,
-    enable => true,
+    ensure => $service_ensure,
+    enable => $service_enable,
   }
 
   Package['topbeat'] -> Class['beats::topbeat::config'] ~> Service['topbeat']
