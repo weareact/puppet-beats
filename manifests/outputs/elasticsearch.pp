@@ -6,9 +6,11 @@ define beats::outputs::elasticsearch (
   $index = 'packetbeat',
   $outputs = $beats::outputs
 ) {
-  concat::fragment {"${title}-output-elasticsearch":
-    target  => "/etc/${title}/${title}.yml",
-    content => template('beats/outputs/elasticsearch.erb'),
-    order   => 21,
+  if ($beats::ensure != 'absent'){
+    concat::fragment {"${title}-output-elasticsearch":
+      target  => "/etc/${title}/${title}.yml",
+      content => template('beats/outputs/elasticsearch.erb'),
+      order   => 21,
+    }
   }
 }
