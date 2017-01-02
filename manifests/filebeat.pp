@@ -7,7 +7,7 @@ class beats::filebeat (
   $spool_size    = 1024,
 ){
 
-  if ($ensure == "absent"){
+  if ($ensure == 'absent'){
     $service_ensure = undef
     $service_enable = undef
   }

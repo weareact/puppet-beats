@@ -8,7 +8,7 @@ class beats::topbeat (
   $stats_filesystem = true,
 ){
 
-  if ($ensure == "absent"){
+  if ($ensure == 'absent'){
     $service_ensure = undef
     $service_enable = undef
   }
