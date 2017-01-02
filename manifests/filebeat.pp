@@ -16,12 +16,14 @@ class beats::filebeat (
     $service_enable = $beats::enable
   }
 
-  beats::common::headers {'filebeat':}
-  concat::fragment {'filebeat.header':
-    target  => '/etc/filebeat/filebeat.yml',
-    content => template('beats/filebeat/filebeat.yml.erb'),
-    order   => '05',
-    notify  => Service['filebeat'],
+  if ($ensure != 'absent'){
+    beats::common::headers {'filebeat':}
+    concat::fragment {'filebeat.header':
+      target  => '/etc/filebeat/filebeat.yml',
+      content => template('beats/filebeat/filebeat.yml.erb'),
+      order   => '05',
+      notify  => Service['filebeat'],
+    }
   }
 
   case $::osfamily {
