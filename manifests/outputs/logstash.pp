@@ -7,6 +7,9 @@ define beats::outputs::logstash (
   $loadbalance = false,
   $use_tls = false,
   $certificate_authorities = ['/etc/pki/tls/certs/logstash-forwarder.crt'],
+  $ssl_certificate = '/etc/pki/tls/certs/logstash-forwarder.crt',
+  $ssl_key = '/etc/pki/tls/private/logstash-forwarder.key',
+  $version_v5 = false,
 ) {
   if ($beats::ensure != 'absent'){
     concat::fragment {"${title}-output-logstash":

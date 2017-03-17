@@ -6,15 +6,15 @@ class beats::repo::yum {
     source => 'https://packages.elastic.co/GPG-KEY-elasticsearch',
   }
 
-  if ($::beats::use_repo_v5) {
+  if ($::beats::version_v5) {
     yumrepo { 'elastic-beats':
-      ensure   => 'present',
-      baseurl  => 'https://artifacts.elastic.co/packages/5.x/yum',
-      descr    => 'Elastic repository for 5.x packages',
-      enabled  => '1',
-      gpgcheck => '1',
-      gpgkey   => 'https://artifacts.elastic.co/GPG-KEY-elasticsearch',
-      require  => Rpmkey['D88E42B4'],
+      ensure      => 'present',
+      baseurl     => 'https://artifacts.elastic.co/packages/5.x/yum',
+      descr       => 'Elastic repository for 5.x packages',
+      enabled     => '1',
+      gpgcheck    => '1',
+      gpgkey      => 'https://artifacts.elastic.co/GPG-KEY-elasticsearch',
+      require     => Rpmkey['D88E42B4'],
     }
   }
   else
@@ -31,5 +31,4 @@ class beats::repo::yum {
   }
 
 }
-
 

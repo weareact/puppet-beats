@@ -40,7 +40,7 @@ class beats (
   $mysql_enabled         = false,
   $redis_enabled         = false,
   $manage_geoip          = true,
-  $use_repo_v5           = false,
+  $version_v5            = false,
 ){
 
   if $outputs_deep_merge {
