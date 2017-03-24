@@ -1,5 +1,5 @@
 # beats
-Elastic libbeat puppet module
+Elastic beats puppet module
 =======
 License
 -------
@@ -7,11 +7,54 @@ GPL v2
 
 ## WARNING ##
 
-This module is still very experimental. Most things work most of the time, mostly. 
+This module is under development. Most things work most of the time, mostly. 
 Some protocols and settings are still missing. 
-*Minimally tested on Debian-flavour systems. No RedHat/CentOS support yet*
+*Minimally tested on Debian-flavour systems. Filebeats tested on RedHat/CentOS 6/7*
 
 ## Example Use ##
+```
+class { 'beats':
+    outputs_deep_merge => false,
+    outputs_logstash => {
+      "filebeat" => { "hosts" => [ "logstash.example.com:5044" ],
+                                   "use_tls" => true,
+                    },
+    },
+    version_v5 => true,
+    agentname   => 'server-name',
+}
+
+class { 'beats::filebeat':
+    prospectors => { 
+              'syslog' => { 
+                  'document_type' => "syslog",
+                  'paths'  => [ "/var/log/messages",
+                                "/var/log/secure",
+                                "/var/log/yum.log",
+                                "/var/log/cron",
+                                "/var/log/maillog",
+                                "/var/log/ntp",
+                              ],
+              },
+              'nginx-error'  => {
+                  'document_type' => "nginx-error",
+                  'paths'  => [
+                                  "/var/log/nginx/*.error.log",
+                                 "/var/log/nginx/error.log",
+                              ],
+              },
+              'nginx-access'  => {
+                  'document_type' => "nginx-access",
+                  'paths'  => [
+                                 "/var/log/nginx/*.access.log",
+                                 "/var/log/nginx/access.log",
+                              ],
+              },
+    },
+}
+```
+
+## Example Use with hiera ##
 
 ```
 include ::beats
