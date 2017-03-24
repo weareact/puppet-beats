@@ -33,6 +33,14 @@ class beats::filebeat (
         ensure  => $ensure,
         require => Yumrepo['elastic-beats'],
       }
+
+      exec { 'update package to 5.x':
+        command => "yum update filebeat -y",
+        unless  => [
+          "rpm -qa filebeat |grep '5.[0-9].[0-9]' |grep \"\" -c",
+        ],
+        require => Package['filebeat'],
+      }
     }
     default: {
       include ::apt::update
