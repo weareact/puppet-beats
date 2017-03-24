@@ -39,6 +39,14 @@ class beats::package (
           ensure  => latest,
           require => $require_for_geoip,
         }
+
+        if ($::operatingsystemmajrelease in ['7']) {
+          package { ['GeoIP-data', 'GeoIP-update']:
+            ensure  => latest,
+            require => $require_for_geoip,
+          }
+        }
+
       }
 
     }

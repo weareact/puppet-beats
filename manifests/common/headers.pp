@@ -8,6 +8,7 @@ define beats::common::headers (
   $uid                   = $beats::uid,
   $gid                   = $beats::gid,
   $geoip_paths           = ['/usr/share/GeoIP/GeoIPCity.dat'],
+  $version_v5            = $beats::version_v5,
 ) {
   concat { "/etc/${title}/${title}.yml":
     ensure  => $ensure,
