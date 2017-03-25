@@ -34,13 +34,15 @@ class beats::filebeat (
         require => Yumrepo['elastic-beats'],
       }
 
-      exec { 'update package to 5.x':
-        path    => [ '/bin', '/usr/bin', '/usr/local/bin' ],
-        command => 'yum update filebeat -y',
-        unless  => [
-          "rpm -qa filebeat |grep '5.[0-9].[0-9]' |grep \"\" -c",
-        ],
-        require => Package['filebeat'],
+      if ($version_v5) {
+        exec { 'update package to 5.x':
+          path    => [ '/bin', '/usr/bin', '/usr/local/bin' ],
+          command => 'yum update filebeat -y',
+          unless  => [
+            "rpm -qa filebeat |grep '5.[0-9].[0-9]' |grep \"\" -c",
+          ],
+          require => Package['filebeat'],
+        }
       }
     }
     default: {
