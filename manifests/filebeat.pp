@@ -5,7 +5,6 @@ class beats::filebeat (
   $prospectors   = {},
   $registry_file = '/var/lib/filebeat/registry',
   $spool_size    = 1024,
-  $version_v5    = false,
 ){
 
   if ($ensure == 'absent'){
@@ -32,17 +31,6 @@ class beats::filebeat (
       package {'filebeat':
         ensure  => $ensure,
         require => Yumrepo['elastic-beats'],
-      }
-
-      if ($version_v5) {
-        exec { 'update package to 5.x':
-          path    => [ '/bin', '/usr/bin', '/usr/local/bin' ],
-          command => 'yum update filebeat -y',
-          unless  => [
-            "rpm -qa filebeat |grep '5.[0-9].[0-9]' |grep \"\" -c",
-          ],
-          require => Package['filebeat'],
-        }
       }
     }
     default: {
