@@ -6,7 +6,7 @@ class beats::repo::yum {
     source => 'https://packages.elastic.co/GPG-KEY-elasticsearch',
   }
 
-  case $::beats_version {
+  case $::beats::version {
     /^5/: {
       yumrepo { 'elastic-beats':
         ensure   => 'present',
