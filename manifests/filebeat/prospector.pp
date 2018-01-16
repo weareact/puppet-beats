@@ -17,6 +17,7 @@ define beats::filebeat::prospector(
   $document_type         = undef,
   $mode                  = '0644',
   $tags                  = undef,
+  $fields_under_root     = false,
 ){
   concat::fragment {"prospector-${title}":
     target  => '/etc/filebeat/filebeat.yml',
