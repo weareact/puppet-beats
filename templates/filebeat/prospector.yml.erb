@@ -6,9 +6,9 @@
 <%- if !@multiline.empty? -%>
       multiline:<% @multiline.each do |key, value| %>
         <%- if key == "pattern" -%>
-          <%= key -%>: "<%= value %>"
+          <%= key -%>: "<%= value -%>"
         <%- else -%>
-          <%= key -%>: <%= value %>
+          <%= key -%>: <%= value -%>
         <%- end -%>
       <%- end -%>
 <%- end -%>
@@ -30,3 +30,4 @@
 <%- if @partial_line_waiting -%>      partial_line_waiting: <%= @partial_line_waiting %><% end -%>
 <%- if @force_close_files -%>      force_close_files: <%= @force_close_files %><% end -%>
 <%- if @tags -%>      tags: <%= @tags %><% end -%>
+
