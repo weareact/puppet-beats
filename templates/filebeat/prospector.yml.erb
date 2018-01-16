@@ -3,6 +3,7 @@
       paths:<% @paths.each do |path| %>
         - <%= path %>
       <%- end -%>
+<%- if @multiline -%>
       multiline:<% @multiline.each do |key, value| %>
         <%- if key == "pattern" -%>
           <%= key -%>: "<%= value -%>"
@@ -10,12 +11,14 @@
           <%= key -%>: <%= value -%>
         <%- end -%>
       <%- end -%>
-
+<% end %>
 <%- if @fields_under_root -%>      fields_under_root: <%= @fields_under_root %><% end %>
+<%- if @fields -%>
       fields:<% @fields.each do |key, value| %>
         <%= key -%>: <%= value %>
       <%- end %>
-<%- if @document_type -%>      document_type: <%= @document_type %><% end %>
+<% end -%>
+<%- if @document_type -%>      document_type: <%= @document_type %><% end -%>
 <%- if @encoding -%>      encoding: <%= @encoding %><% end -%>
 <%- if @ignore_older -%>      ignore_older: <%= @ignore_older %><% end -%>
 <%- if @scan_frequency -%>      scan_frequency: <%= @scan_frequency %><% end -%>
