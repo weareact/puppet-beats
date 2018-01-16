@@ -17,7 +17,7 @@
       fields:<% @fields.each do |key, value| %>
         <%= key -%>: <%= value %>
       <%- end %>
-<% end -%>
+<%- end -%>
 <%- if @document_type -%>      document_type: <%= @document_type %><% end -%>
 <%- if @encoding -%>      encoding: <%= @encoding %><% end -%>
 <%- if @ignore_older -%>      ignore_older: <%= @ignore_older %><% end -%>
