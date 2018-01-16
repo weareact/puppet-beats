@@ -11,12 +11,12 @@
           <%= key -%>: <%= value -%>
         <%- end -%>
       <%- end -%>
-<% end %>
+<%- end -%>
 <%- if @fields_under_root -%>      fields_under_root: <%= @fields_under_root %><% end %>
 <%- if @fields -%>
       fields:<% @fields.each do |key, value| %>
         <%= key -%>: <%= value %>
-      <%- end %>
+      <%- end -%>
 <%- end -%>
 <%- if @document_type -%>      document_type: <%= @document_type %><% end -%>
 <%- if @encoding -%>      encoding: <%= @encoding %><% end -%>
