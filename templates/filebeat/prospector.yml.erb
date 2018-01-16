@@ -6,7 +6,7 @@
 <%- if !@multiline.empty? -%>
       multiline:<% @multiline.each do |key, value| %>
         <%- if key == "pattern" -%>
-          <%= key -%>: "<%= value %>"
+          <%= key -%>: '<%= value %>'
         <%- else -%>
           <%= key -%>: <%= value %>
         <%- end -%>
